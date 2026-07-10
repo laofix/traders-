@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>First Traders - Produits d'Investissement</title>
+    <title>Quartz Location - Produits d'Investissement</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         * { box-sizing: border-box; font-family: 'Helvetica Neue', Arial, sans-serif; }
         body { margin: 0; background-color: #f4f4f4; color: #000; padding-bottom: 80px; }
 
         .hero-header {
-            background-color: #00A651; /* Noir changé en Vert */
+            background-color: #E91E63; /* Modifié en Rose */
             color: #fff;
             padding: 30px 20px 60px;
             text-align: center;
@@ -74,7 +74,7 @@
             margin-bottom: 8px;
         }
         .btn-buy {
-            background-color: #00A651; /* Noir changé en Vert */
+            background-color: #E91E63; /* Modifié en Rose */
             color: #fff;
             border: none;
             width: 100%;
@@ -85,7 +85,7 @@
             text-transform: uppercase;
             cursor: pointer;
         }
-        .btn-buy:disabled { background-color: #005c2c; cursor: not-allowed; }
+        .btn-buy:disabled { background-color: #ad144b; cursor: not-allowed; }
 
         .bottom-nav {
             position: fixed;
@@ -98,14 +98,14 @@
             border-top: 1px solid #ddd;
         }
         .nav-item { text-decoration: none; color: #888; text-align: center; font-size: 11px; }
-        .nav-item.active { color: #00A651; font-weight: bold; } /* Actif en Vert */
+        .nav-item.active { color: #E91E63; font-weight: bold; } /* Modifié en Rose */
         .nav-icon { font-size: 22px; display: block; margin-bottom: 4px; }
     </style>
 </head>
 <body>
 
     <div class="hero-header">
-        <h1>First Traders</h1>
+        <h1>Quartz Location</h1>
     </div>
 
     <div class="counter-section">
@@ -116,7 +116,7 @@
     <div class="product-list">
         <div class="vip-card">
             <div class="vip-infos">
-                <div class="vip-title">VIP1 First Traders Start</div>
+                <div class="vip-title">VIP1 Quartz Location Start</div>
                 <div class="vip-data">
                     <div><span>Prix:</span> <b>FC 15,000</b></div>
                     <div><span>Quotidien:</span> <b>FC 4,500</b></div>
@@ -126,13 +126,13 @@
             </div>
             <div class="vip-action">
                 <img src="IMG_5483.jpeg" class="vip-image">
-                <button class="btn-buy" onclick="buyProduct('VIP1 First Traders Start', 15000, 4500)">Acheter</button>
+                <button class="btn-buy" id="btn-1" onclick="buyProduct('VIP1 Quartz Location Start', 15000, 4500, 'IMG_5483.jpeg', 1)">Acheter</button>
             </div>
         </div>
 
         <div class="vip-card">
             <div class="vip-infos">
-                <div class="vip-title">VIP2 First Traders Basic</div>
+                <div class="vip-title">VIP2 Quartz Location Basic</div>
                 <div class="vip-data">
                     <div><span>Prix:</span> <b>FC 30,000</b></div>
                     <div><span>Quotidien:</span> <b>FC 9,300</b></div>
@@ -142,13 +142,13 @@
             </div>
             <div class="vip-action">
                 <img src="IMG_5484.jpeg" class="vip-image">
-                <button class="btn-buy" onclick="buyProduct('VIP2 First Traders Basic', 30000, 9300)">Acheter</button>
+                <button class="btn-buy" id="btn-2" onclick="buyProduct('VIP2 Quartz Location Basic', 30000, 9300, 'IMG_5484.jpeg', 2)">Acheter</button>
             </div>
         </div>
 
         <div class="vip-card">
             <div class="vip-infos">
-                <div class="vip-title">VIP3 First Traders Medium</div>
+                <div class="vip-title">VIP3 Quartz Location Medium</div>
                 <div class="vip-data">
                     <div><span>Prix:</span> <b>FC 60,000</b></div>
                     <div><span>Quotidien:</span> <b>FC 19,200</b></div>
@@ -158,13 +158,13 @@
             </div>
             <div class="vip-action">
                 <img src="IMG_5485.jpeg" class="vip-image">
-                <button class="btn-buy" onclick="buyProduct('VIP3 First Traders Medium', 60000, 19200)">Acheter</button>
+                <button class="btn-buy" id="btn-3" onclick="buyProduct('VIP3 Quartz Location Medium', 60000, 19200, 'IMG_5485.jpeg', 3)">Acheter</button>
             </div>
         </div>
 
         <div class="vip-card">
             <div class="vip-infos">
-                <div class="vip-title">VIP4 First Traders Pro</div>
+                <div class="vip-title">VIP4 Quartz Location Pro</div>
                 <div class="vip-data">
                     <div><span>Prix:</span> <b>FC 120,000</b></div>
                     <div><span>Quotidien:</span> <b>FC 39,600</b></div>
@@ -174,13 +174,13 @@
             </div>
             <div class="vip-action">
                 <img src="IMG_5486.jpeg" class="vip-image">
-                <button class="btn-buy" onclick="buyProduct('VIP4 First Traders Pro', 120000, 39600)">Acheter</button>
+                <button class="btn-buy" id="btn-4" onclick="buyProduct('VIP4 Quartz Location Pro', 120000, 39600, 'IMG_5486.jpeg', 4)">Acheter</button>
             </div>
         </div>
 
         <div class="vip-card">
             <div class="vip-infos">
-                <div class="vip-title">VIP5 First Traders Elite</div>
+                <div class="vip-title">VIP5 Quartz Location Elite</div>
                 <div class="vip-data">
                     <div><span>Prix:</span> <b>FC 250,000</b></div>
                     <div><span>Quotidien:</span> <b>FC 85,000</b></div>
@@ -190,13 +190,13 @@
             </div>
             <div class="vip-action">
                 <img src="IMG_5487.jpeg" class="vip-image">
-                <button class="btn-buy" onclick="buyProduct('VIP5 First Traders Elite', 250000, 85000)">Acheter</button>
+                <button class="btn-buy" id="btn-5" onclick="buyProduct('VIP5 Quartz Location Elite', 250000, 85000, 'IMG_5487.jpeg', 5)">Acheter</button>
             </div>
         </div>
 
         <div class="vip-card">
             <div class="vip-infos">
-                <div class="vip-title">VIP6 First Traders Business</div>
+                <div class="vip-title">VIP6 Quartz Location Business</div>
                 <div class="vip-data">
                     <div><span>Prix:</span> <b>FC 450,000</b></div>
                     <div><span>Quotidien:</span> <b>FC 157,500</b></div>
@@ -206,13 +206,13 @@
             </div>
             <div class="vip-action">
                 <img src="IMG_5488.jpeg" class="vip-image">
-                <button class="btn-buy" onclick="buyProduct('VIP6 First Traders Business', 450000, 157500)">Acheter</button>
+                <button class="btn-buy" id="btn-6" onclick="buyProduct('VIP6 Quartz Location Business', 450000, 157500, 'IMG_5488.jpeg', 6)">Acheter</button>
             </div>
         </div>
 
         <div class="vip-card">
             <div class="vip-infos">
-                <div class="vip-title">VIP7 First Traders Master</div>
+                <div class="vip-title">VIP7 Quartz Location Master</div>
                 <div class="vip-data">
                     <div><span>Prix:</span> <b>FC 1,000,000</b></div>
                     <div><span>Quotidien:</span> <b>FC 360,000</b></div>
@@ -222,13 +222,13 @@
             </div>
             <div class="vip-action">
                 <img src="IMG_5489.jpeg" class="vip-image">
-                <button class="btn-buy" onclick="buyProduct('VIP7 First Traders Master', 1000000, 360000)">Acheter</button>
+                <button class="btn-buy" id="btn-7" onclick="buyProduct('VIP7 Quartz Location Master', 1000000, 360000, 'IMG_5489.jpeg', 7)">Acheter</button>
             </div>
         </div>
 
         <div class="vip-card">
             <div class="vip-infos">
-                <div class="vip-title">VIP8 First Traders Ultimate</div>
+                <div class="vip-title">VIP8 Quartz Location Ultimate</div>
                 <div class="vip-data">
                     <div><span>Prix:</span> <b>FC 2,000,000</b></div>
                     <div><span>Quotidien:</span> <b>FC 800,000</b></div>
@@ -238,7 +238,7 @@
             </div>
             <div class="vip-action">
                 <img src="IMG_5490.jpeg" class="vip-image">
-                <button class="btn-buy" onclick="buyProduct('VIP8 First Traders Ultimate', 2000000, 800000)">Acheter</button>
+                <button class="btn-buy" id="btn-8" onclick="buyProduct('VIP8 Quartz Location Ultimate', 2000000, 800000, 'IMG_5490.jpeg', 8)">Acheter</button>
             </div>
         </div>
     </div>
@@ -251,72 +251,138 @@
     </nav>
 
     <script>
-        // Ta vraie URL Firebase Realtime Database
         const mainBaseUrl = "https://canal-e4274-default-rtdb.firebaseio.com";
         const dbUrl = `${mainBaseUrl}/users`;
         const userPhone = localStorage.getItem('userPhone');
 
         if (!userPhone) { window.location.href = 'index.html'; }
 
-        async function buyProduct(name, price, daily) {
+        async function buyProduct(name, price, daily, imageSrc, btnId) {
+            const btn = document.getElementById(`btn-${btnId}`);
+            btn.disabled = true;
+            btn.innerText = "...";
+
             try {
-                // Lecture directe de l'utilisateur connecté via sa clé numéro de téléphone
                 const response = await fetch(`${dbUrl}/${userPhone}.json`);
                 const currentUser = await response.json();
 
-                if (currentUser) {
-                    const currentBalance = currentUser.balance || 0;
-
-                    if (currentBalance < price) {
-                        alert("Solde insuffisant ! Veuillez recharger votre compte.");
-                    } else {
-                        const newBalance = currentBalance - price;
-                        
-                        const updateData = {
-                            balance: newBalance,
-                            hasPurchased: true 
-                        };
-
-                        const purchaseInfo = {
-                            name: name,
-                            price: price,
-                            dailyIncome: daily,
-                            duration: "90 jours",
-                            purchaseDate: new Date().toISOString()
-                        };
-
-                        // Mise à jour du solde utilisateur (PATCH direct sans boucle)
-                        await fetch(`${dbUrl}/${userPhone}.json`, {
-                            method: 'PATCH',
-                            body: JSON.stringify(updateData)
-                        });
-
-                        // Sauvegarde de l'achat dans la branche purchases de l'utilisateur
-                        await fetch(`${mainBaseUrl}/purchases/${userPhone}.json`, {
-                            method: 'POST',
-                            body: JSON.stringify(purchaseInfo)
-                        });
-
-                        alert("Achat réussi ! Votre VIP est maintenant actif.");
-                        location.reload();
-                    }
-                } else {
+                if (!currentUser) {
                     alert("Erreur de session. Veuillez vous reconnecter.");
+                    window.location.href = 'index.html';
+                    return;
                 }
+
+                const currentBalance = currentUser.balance || 0;
+
+                if (currentBalance < price) {
+                    alert("Solde insuffisant ! Veuillez recharger votre compte.");
+                    btn.disabled = false;
+                    btn.innerText = "Acheter";
+                    return;
+                }
+
+                const newBalance = currentBalance - price;
+
+                // Structure de l'investissement envoyé à la liste des produits possédés
+                const purchaseInfo = {
+                    name: name,
+                    price: price,
+                    dailyIncome: daily,
+                    img: imageSrc, // Garde l'image pour l'afficher sur mes-produits.html
+                    duration: "90 jours",
+                    dateAchat: new Date().toISOString(),
+                    expireLe: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString(),
+                    dernierCollecte: new Date().toISOString() // Utile pour la récolte des revenus après 24 heures
+                };
+
+                // 1. Déduire le solde de l'acheteur
+                await fetch(`${dbUrl}/${userPhone}.json`, {
+                    method: 'PATCH',
+                    body: JSON.stringify({ balance: newBalance, hasPurchased: true })
+                });
+
+                // 2. Ajouter l'investissement dans la branche dédiée de l'utilisateur
+                await fetch(`${mainBaseUrl}/purchases/${userPhone}.json`, {
+                    method: 'POST',
+                    body: JSON.stringify(purchaseInfo)
+                });
+
+                // 3. Distribution automatique des commissions de parrainage sur 3 niveaux
+                if (currentUser.referredBy && currentUser.referredBy !== "") {
+                    const resGlobal = await fetch(`${dbUrl}.json`);
+                    const allUsers = await resGlobal.json();
+
+                    if (allUsers) {
+                        // Indexation par code d'invitation (les 6 derniers chiffres du numéro)
+                        const codeIndex = {};
+                        for (let key in allUsers) {
+                            if (allUsers[key].inviteCode) {
+                                codeIndex[allUsers[key].inviteCode] = { phoneKey: key, data: allUsers[key] };
+                            }
+                        }
+
+                        // --- NIVEAU 1 (25%) ---
+                        let parrain1 = codeIndex[currentUser.referredBy];
+                        if (parrain1) {
+                            const comm1 = price * 0.25;
+                            await fetch(`${dbUrl}/${parrain1.phoneKey}.json`, {
+                                method: 'PATCH',
+                                body: JSON.stringify({
+                                    balance: (parrain1.data.balance || 0) + comm1,
+                                    totalGainsLV1: (parrain1.data.totalGainsLV1 || 0) + comm1
+                                })
+                            });
+
+                            // --- NIVEAU 2 (2%) ---
+                            if (parrain1.data.referredBy && parrain1.data.referredBy !== "") {
+                                let parrain2 = codeIndex[parrain1.data.referredBy];
+                                if (parrain2) {
+                                    const comm2 = price * 0.02;
+                                    await fetch(`${dbUrl}/${parrain2.phoneKey}.json`, {
+                                        method: 'PATCH',
+                                        body: JSON.stringify({
+                                            balance: (parrain2.data.balance || 0) + comm2,
+                                            totalGainsLV2: (parrain2.data.totalGainsLV2 || 0) + comm2
+                                        })
+                                    });
+
+                                    // --- NIVEAU 3 (1%) ---
+                                    if (parrain2.data.referredBy && parrain2.data.referredBy !== "") {
+                                        let parrain3 = codeIndex[parrain2.data.referredBy];
+                                        if (parrain3) {
+                                            const comm3 = price * 0.01;
+                                            await fetch(`${dbUrl}/${parrain3.phoneKey}.json`, {
+                                                method: 'PATCH',
+                                                body: JSON.stringify({
+                                                    balance: (parrain3.data.balance || 0) + comm3,
+                                                    totalGainsLV3: (parrain3.data.totalGainsLV3 || 0) + comm3
+                                                })
+                                            });
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                alert("Achat réussi ! Votre VIP est maintenant actif.");
+                window.location.href = 'mes-produits.html';
+
             } catch (error) {
                 console.error(error);
                 alert("Erreur lors de la transaction. Vérifiez votre connexion.");
+                btn.disabled = false;
+                btn.innerText = "Acheter";
             }
         }
 
         async function loadCounters() {
             try {
-                // Chargement direct des données utilisateur pour afficher les revenus cumulés
                 const response = await fetch(`${dbUrl}/${userPhone}.json`);
                 const currentUser = await response.json();
 
                 if (currentUser) {
-                    // Chargement direct du nombre d'achats effectués
                     const prodRes = await fetch(`${mainBaseUrl}/purchases/${userPhone}.json`);
                     const products = await prodRes.json();
                     const count = products ? Object.keys(products).length : 0;
@@ -327,7 +393,7 @@
             } catch (e) { console.log(e); }
         }
 
-        loadCounters();
+        window.onload = loadCounters;
     </script>
 </body>
 </html>
