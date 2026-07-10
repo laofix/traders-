@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>First Traders - Recharge Officielle</title>
+    <title>Quartz Location - Recharge Officielle</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         * { box-sizing: border-box; font-family: 'Helvetica Neue', Arial, sans-serif; }
         body { margin: 0; background-color: #f8f8f8; color: #000; padding-bottom: 40px; }
 
-        .header { background: #00A651; /* Noir changé en Vert */ color: #fff; padding: 20px; display: flex; align-items: center; gap: 15px; }
+        .header { background: #E91E63; /* Modifié en Rose */ color: #fff; padding: 20px; display: flex; align-items: center; gap: 15px; }
         .header a { color: #fff; text-decoration: none; }
         
         .container { padding: 15px; }
-        .section-title { font-size: 14px; font-weight: bold; margin: 20px 0 10px; text-transform: uppercase; border-left: 4px solid #00A651; padding-left: 10px; }
+        .section-title { font-size: 14px; font-weight: bold; margin: 20px 0 10px; text-transform: uppercase; border-left: 4px solid #E91E63; padding-left: 10px; } /* Modifié en Rose */
 
         /* Grille des montants VIP */
         .amount-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
@@ -21,7 +21,7 @@
             background: #fff; border: 1.5px solid #eee; padding: 15px; border-radius: 10px;
             text-align: center; cursor: pointer; transition: 0.3s;
         }
-        .amount-card.active { border-color: #00A651; background: #00A651; color: #fff; } /* Noir changé en Vert */
+        .amount-card.active { border-color: #E91E63; background: #E91E63; color: #fff; } /* Modifié en Rose */
         .amount-card span { display: block; font-size: 10px; opacity: 0.7; }
         .amount-card strong { font-size: 15px; }
 
@@ -31,15 +31,15 @@
             background: #fff; border: 1.5px solid #eee; padding: 10px; border-radius: 10px;
             text-align: center; cursor: pointer; font-size: 11px; font-weight: bold;
         }
-        .network-option.active { border-color: #00A651; background: #f0f0f0; } /* Noir changé en Vert */
+        .network-option.active { border-color: #E91E63; background: #f0f0f0; } /* Modifié en Rose */
 
         /* Affichage du numéro agent */
         .agent-display {
-            background: #00A651; /* Noir changé en Vert */ color: #fff; padding: 20px; border-radius: 12px;
+            background: #E91E63; /* Modifié en Rose */ color: #fff; padding: 20px; border-radius: 12px;
             display: none; text-align: center; margin-bottom: 20px;
         }
         .agent-number { font-size: 22px; font-weight: bold; letter-spacing: 2px; margin: 10px 0; display: block; }
-        .btn-copy { background: #fff; color: #00A651; border: none; padding: 5px 15px; border-radius: 15px; font-size: 12px; font-weight: bold; cursor: pointer; }
+        .btn-copy { background: #fff; color: #E91E63; border: none; padding: 5px 15px; border-radius: 15px; font-size: 12px; font-weight: bold; cursor: pointer; } /* Modifié en Rose */
 
         /* Formulaire de validation */
         .recharge-form { background: #fff; padding: 20px; border-radius: 15px; border: 1px solid #eee; display: none; }
@@ -51,10 +51,10 @@
         }
 
         .btn-submit {
-            background: #00A651; /* Noir changé en Vert */ color: #fff; width: 100%; padding: 16px; border-radius: 30px;
+            background: #E91E63; /* Modifié en Rose */ color: #fff; width: 100%; padding: 16px; border-radius: 30px;
             border: none; font-size: 16px; font-weight: bold; margin-top: 10px; cursor: pointer;
         }
-        .btn-submit:disabled { background: #005c2c; } /* Gris foncé changé en Vert sombre */
+        .btn-submit:disabled { background: #880e4f; } /* Modifié en Rose sombre */
     </style>
 </head>
 <body>
@@ -68,14 +68,14 @@
         
         <div class="section-title">1. Sélectionnez le montant (VIP)</div>
         <div class="amount-grid">
-            <div class="amount-card" onclick="selectAmount(15000, this)"><span>VIP 1</span><strong>15,000 FC</strong></div>
-            <div class="amount-card" onclick="selectAmount(30000, this)"><span>VIP 2</span><strong>30,000 FC</strong></div>
-            <div class="amount-card" onclick="selectAmount(60000, this)"><span>VIP 3</span><strong>60,000 FC</strong></div>
-            <div class="amount-card" onclick="selectAmount(120000, this)"><span>VIP 4</span><strong>120,000 FC</strong></div>
-            <div class="amount-card" onclick="selectAmount(250000, this)"><span>VIP 5</span><strong>250,000 FC</strong></div>
-            <div class="amount-card" onclick="selectAmount(450000, this)"><span>VIP 6</span><strong>450,000 FC</strong></div>
-            <div class="amount-card" onclick="selectAmount(1000000, this)"><span>VIP 7</span><strong>1,000,000 FC</strong></div>
-            <div class="amount-card" onclick="selectAmount(2000000, this)"><span>VIP 8</span><strong>2,000,000 FC</strong></div>
+            <div class="amount-card" onclick="selectAmount(15000, this)"><span>VIP 1</span><strong>15 000 FC</strong></div>
+            <div class="amount-card" onclick="selectAmount(30000, this)"><span>VIP 2</span><strong>30 000 FC</strong></div>
+            <div class="amount-card" onclick="selectAmount(60000, this)"><span>VIP 3</span><strong>60 000 FC</strong></div>
+            <div class="amount-card" onclick="selectAmount(120000, this)"><span>VIP 4</span><strong>120 000 FC</strong></div>
+            <div class="amount-card" onclick="selectAmount(250000, this)"><span>VIP 5</span><strong>250 000 FC</strong></div>
+            <div class="amount-card" onclick="selectAmount(450000, this)"><span>VIP 6</span><strong>450 000 FC</strong></div>
+            <div class="amount-card" onclick="selectAmount(1000000, this)"><span>VIP 7</span><strong>1 000 000 FC</strong></div>
+            <div class="amount-card" onclick="selectAmount(2000000, this)"><span>VIP 8</span><strong>2 000 000 FC</strong></div>
         </div>
 
         <div class="section-title">2. Choisissez votre réseau</div>
@@ -107,7 +107,6 @@
     </div>
 
     <script>
-        // URL DB mise à jour vers ton Firebase réel
         const dbUrl = "https://canal-e4274-default-rtdb.firebaseio.com/recharges_en_attente";
         const userPhone = localStorage.getItem('userPhone');
         
