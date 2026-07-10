@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>First Traders - Centre des Tâches</title>
+    <title>Quartz Location - Centre des Tâches</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         * { box-sizing: border-box; font-family: 'Helvetica Neue', Arial, sans-serif; }
         body { margin: 0; background-color: #f8f8f8; color: #000; padding-bottom: 30px; }
 
-        .header { background: #00A651; /* Noir changé en Vert */ color: #fff; padding: 20px; display: flex; align-items: center; gap: 15px; }
+        .header { background: #E91E63; /* Modifié en Rose */ color: #fff; padding: 20px; display: flex; align-items: center; gap: 15px; }
         .header a { color: #fff; text-decoration: none; }
         
         .container { padding: 20px; }
 
         /* Bannière Points */
         .points-banner {
-            background: #00A651; /* Noir changé en Vert */
+            background: #E91E63; /* Modifié en Rose */
             color: #fff;
             padding: 30px 20px;
             border-radius: 15px;
@@ -40,10 +40,10 @@
         }
         .task-info h3 { margin: 0 0 5px; font-size: 15px; }
         .task-info p { margin: 0; font-size: 12px; color: #666; }
-        .task-reward { font-weight: bold; color: #00A651; font-size: 14px; margin-top: 5px; display: block; } /* Changé en Vert */
+        .task-reward { font-weight: bold; color: #E91E63; font-size: 14px; margin-top: 5px; display: block; } /* Modifié en Rose */
 
         .btn-claim {
-            background: #00A651; /* Noir changé en Vert */
+            background: #E91E63; /* Modifié en Rose */
             color: #fff;
             border: none;
             padding: 10px 20px;
@@ -71,7 +71,7 @@
             background: #fff;
             border-radius: 10px;
             line-height: 1.5;
-            border-left: 3px solid #00A651;
+            border-left: 3px solid #E91E63; /* Modifié en Rose */
         }
     </style>
 </head>
@@ -79,7 +79,7 @@
 
     <div class="header">
         <a href="dashboard.html"><i class="fas fa-arrow-left"></i></a>
-        <h1>Centre des Tâches</h1>
+        <h1 style="font-size: 18px; margin: 0;">Centre des Tâches</h1>
     </div>
 
     <div class="container">
@@ -109,26 +109,23 @@
         </div>
 
         <div class="instructions">
-            <strong style="color: #00A651;">Règles de récompense :</strong><br>
+            <strong style="color: #E91E63;">Règles de récompense :</strong><br>
             • Le bonus de connexion peut être réclamé une seule fois toutes les 24 heures.<br>
             • Les fonds sont ajoutés directement à votre solde de revenus principal.<br>
-            • Revenez chaque jour pour accumuler vos gains gratuitement sur First Traders !
+            • Revenez chaque jour pour accumuler vos gains gratuitement sur Quartz Location !
         </div>
 
     </div>
 
     <script>
-        // Configuration de la DB Firebase réelle pour First Traders
         const dbUrl = "https://canal-e4274-default-rtdb.firebaseio.com/users";
         const userPhone = localStorage.getItem('userPhone');
         let currentBalance = 0;
 
         if (!userPhone) { window.location.href = 'index.html'; }
 
-        // Charger les informations de l'utilisateur et vérifier le statut du bouton
         async function checkDailyStatus() {
             try {
-                // Lecture directe et rapide via le nœud numéro de téléphone
                 const res = await fetch(`${dbUrl}/${userPhone}.json`);
                 const currentUser = await res.json();
                 
@@ -136,7 +133,6 @@
                     currentBalance = currentUser.balance || 0;
                     document.getElementById('totalBonus').innerText = currentBalance.toLocaleString() + " FC";
                     
-                    // Vérification de la date de la dernière réclamation
                     const lastClaim = currentUser.lastDailyClaim;
                     const today = new Date().toDateString(); 
                     
@@ -158,7 +154,6 @@
             }
         }
 
-        // Action de réclamation du bonus quotidien
         async function claimBonus() {
             const btn = document.getElementById('dailyBtn');
             btn.disabled = true;
@@ -167,7 +162,6 @@
             const today = new Date().toDateString();
 
             try {
-                // 1. Sécurité en direct : Re-vérifier l'état de la base pour bloquer le double-clic ou la triche
                 const verifyRes = await fetch(`${dbUrl}/${userPhone}.json`);
                 const userData = await verifyRes.json();
 
@@ -178,11 +172,9 @@
                     return;
                 }
 
-                // 2. Calculer le nouveau solde (+100 FC)
                 const latestBalance = userData ? (userData.balance || 0) : currentBalance;
                 const newBalance = latestBalance + 100;
 
-                // 3. Mettre à jour Firebase de manière atomique
                 await fetch(`${dbUrl}/${userPhone}.json`, {
                     method: 'PATCH',
                     body: JSON.stringify({
@@ -191,12 +183,11 @@
                     })
                 });
 
-                // 4. Actualiser instantanément l'interface
                 currentBalance = newBalance;
                 document.getElementById('totalBonus').innerText = newBalance.toLocaleString() + " FC";
                 btn.innerText = "Récupéré ✓";
                 btn.classList.add('done');
-                alert("Félicitations ! 100 FC ont été ajoutés à votre solde First Traders.");
+                alert("Félicitations ! 100 FC ont été ajoutés à votre solde Quartz Location.");
 
             } catch (error) {
                 console.error("Erreur de transaction bonus :", error);
@@ -206,7 +197,6 @@
             }
         }
 
-        // Lancement de la vérification au chargement initial
         checkDailyStatus();
     </script>
 
