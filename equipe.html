@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>First Traders - Mon Équipe</title>
+    <title>Quartz Location - Mon Équipe</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         * { box-sizing: border-box; font-family: 'Helvetica Neue', Arial, sans-serif; }
         body { margin: 0; background-color: #f8f8f8; color: #000; padding-bottom: 80px; }
 
         .team-header {
-            background-color: #00A651; /* Vert First Traders */
+            background-color: #E91E63; /* Modifié en Rose */
             color: #fff;
             padding: 40px 20px;
             text-align: center;
@@ -35,15 +35,15 @@
         }
         .lv-badge {
             display: inline-block;
-            border: 1px solid #00A651;
-            color: #00A651;
+            border: 1px solid #E91E63; /* Modifié en Rose */
+            color: #E91E63;
             padding: 2px 8px;
             border-radius: 5px;
             font-weight: bold;
             font-size: 12px;
             margin-bottom: 8px;
         }
-        .comm-rate { font-size: 11px; font-weight: bold; margin-bottom: 5px; color: #00A651; }
+        .comm-rate { font-size: 11px; font-weight: bold; margin-bottom: 5px; color: #E91E63; } /* Modifié en Rose */
         .comm-stats { font-size: 10px; color: #666; line-height: 1.4; }
 
         .nav-buttons {
@@ -53,12 +53,12 @@
             padding: 0 20px 20px;
         }
         .btn-outline {
-            border: 1px solid #00A651;
+            border: 1px solid #E91E63; /* Modifié en Rose */
             padding: 8px 15px;
             border-radius: 20px;
             font-size: 12px;
             text-decoration: none;
-            color: #00A651;
+            color: #E91E63;
             font-weight: 500;
         }
 
@@ -82,7 +82,7 @@
         }
         .copy-text { flex: 1; font-size: 13px; color: #333; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
         .btn-copy {
-            background: #00A651;
+            background: #E91E63; /* Modifié en Rose */
             color: #fff;
             border: none;
             padding: 6px 15px;
@@ -92,7 +92,7 @@
         }
 
         .progression-banner {
-            background: #00A651;
+            background: #E91E63; /* Modifié en Rose */
             color: #fff;
             margin: 20px;
             padding: 20px;
@@ -115,7 +115,7 @@
             border-top: 1px solid #ddd;
         }
         .nav-item { text-decoration: none; color: #888; text-align: center; font-size: 11px; }
-        .nav-item.active { color: #00A651; font-weight: bold; }
+        .nav-item.active { color: #E91E63; font-weight: bold; } /* Modifié en Rose */
         .nav-icon { font-size: 22px; display: block; margin-bottom: 4px; }
     </style>
 </head>
@@ -123,13 +123,13 @@
 
     <div class="team-header">
         <h1>ÉQUIPE</h1>
-        <p>Invitez vos amis à rejoindre l'aventure First Traders</p>
+        <p>Invitez vos amis à rejoindre l'aventure Quartz Location</p>
     </div>
 
     <div class="commission-grid">
         <div class="comm-card">
             <div class="lv-badge">Lv1</div>
-            <div class="comm-rate">Commission : 35%</div>
+            <div class="comm-rate">Commission : 25%</div>
             <div class="comm-stats">Membres : <span id="countLv1">0</span><br>Gains : <span id="rewardLv1">0 FC</span></div>
         </div>
         <div class="comm-card">
@@ -174,10 +174,10 @@
     </nav>
 
     <script>
-        // Ta base Firebase réelle
         const dbUrl = "https://canal-e4274-default-rtdb.firebaseio.com/users";
         const userPhone = localStorage.getItem('userPhone');
-        const baseUrl = "https://traders-first.github.io/traders-/";
+        // URL de base mise à jour avec Quartz Location
+        const baseUrl = "https://traders-first.github.io/Quartz-Location/";
 
         if (!userPhone) { window.location.href = 'index.html'; }
 
@@ -203,20 +203,23 @@
                 let lv1Count = 0, lv2Count = 0, lv3Count = 0;
                 let lv1Gains = 0, lv2Gains = 0, lv3Gains = 0;
 
-                // Tableaux de codes de parrainage pour isoler strictement chaque niveau
                 let lv1Codes = [];
                 let lv2Codes = [];
 
                 if (users) {
-                    // ÉTAPE 1 : Extraire et compter uniquement le Niveau 1 Direct
+                    // 1. Récupérer les gains cumulés réels de l'utilisateur connecté
+                    const currentUserData = users[userPhone];
+                    if (currentUserData) {
+                        lv1Gains = currentUserData.totalGainsLV1 || 0;
+                        lv2Gains = currentUserData.totalGainsLV2 || 0;
+                        lv3Gains = currentUserData.totalGainsLV3 || 0;
+                    }
+
+                    // 2. Établir l'arbre généalogique de l'équipe pour compter les membres par niveau
                     for (let id in users) {
                         const u = users[id];
                         if (u.phone && u.referredBy === myInviteCode) {
                             lv1Count++;
-                            // Récupération des gains de parrainage s'ils existent dans la structure
-                            lv1Gains += parseFloat(u.commissionLv1 || u.rewardFromUser || 0);
-                            
-                            // On enregistre son code d'invitation unique (les 6 derniers chiffres de son numéro)
                             const currentCode = u.phone.slice(-6);
                             if (!lv1Codes.includes(currentCode)) {
                                 lv1Codes.push(currentCode);
@@ -224,15 +227,11 @@
                         }
                     }
 
-                    // ÉTAPE 2 : Extraire et compter le Niveau 2 (Parrainé uniquement par un membre du Lv1)
                     for (let id in users) {
                         const u = users[id];
                         if (u.phone && u.referredBy && lv1Codes.includes(u.referredBy)) {
-                            // Sécurité additionnelle : éviter qu'un membre s'auto-parraine ou boucle en Lv1
                             if (u.phone.slice(-6) !== myInviteCode) {
                                 lv2Count++;
-                                lv2Gains += parseFloat(u.commissionLv2 || 0);
-
                                 const currentCode = u.phone.slice(-6);
                                 if (!lv2Codes.includes(currentCode)) {
                                     lv2Codes.push(currentCode);
@@ -241,21 +240,18 @@
                         }
                     }
 
-                    // ÉTAPE 3 : Extraire et compter le Niveau 3 (Parrainé uniquement par un membre du Lv2)
                     for (let id in users) {
                         const u = users[id];
                         if (u.referredBy && lv2Codes.includes(u.referredBy)) {
-                            // Sécurité : Ne doit appartenir ni au Lv1 ni au Lv2 ni à toi-même
                             const currentCode = u.phone ? u.phone.slice(-6) : "";
                             if (currentCode !== myInviteCode && !lv1Codes.includes(currentCode)) {
                                 lv3Count++;
-                                lv3Gains += parseFloat(u.commissionLv3 || 0);
                             }
                         }
                     }
                 }
 
-                // Affichage dynamique et sécurisé dans l'interface graphique
+                // Affichage dynamique dans l'interface graphique
                 document.getElementById('countLv1').innerText = lv1Count;
                 document.getElementById('rewardLv1').innerText = lv1Gains.toLocaleString() + " FC";
 
@@ -265,16 +261,14 @@
                 document.getElementById('countLv3').innerText = lv3Count;
                 document.getElementById('rewardLv3').innerText = lv3Gains.toLocaleString() + " FC";
 
-                // Total global des membres de l'organisation
                 document.getElementById('totalTeam').innerText = (lv1Count + lv2Count + lv3Count).toLocaleString();
 
             } catch (error) {
-                console.error("Erreur critique lors de la génération de l'équipe :", error);
+                console.error("Erreur d'analyse de l'équipe :", error);
             }
         }
 
-        // Lancement immédiat de la construction de l'arbre d'équipe
-        loadTeamData();
+        window.onload = loadTeamData;
     </script>
 </body>
 </html>
