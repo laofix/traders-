@@ -9,14 +9,14 @@
         * { box-sizing: border-box; font-family: 'Helvetica Neue', Arial, sans-serif; }
         body { margin: 0; background-color: #f8f8f8; color: #000; padding-bottom: 30px; }
 
-        .header { background: #E91E63; /* Modifié en Rose */ color: #fff; padding: 20px; display: flex; align-items: center; gap: 15px; }
+        .header { background: #E91E63; color: #fff; padding: 20px; display: flex; align-items: center; gap: 15px; }
         .header a { color: #fff; text-decoration: none; }
         
         .container { padding: 20px; }
 
         /* Carte Solde Disponible */
         .balance-box {
-            background: #E91E63; /* Modifié en Rose */ color: #fff; padding: 25px; border-radius: 15px;
+            background: #E91E63; color: #fff; padding: 25px; border-radius: 15px;
             text-align: center; margin-bottom: 25px;
         }
         .balance-box span { font-size: 13px; opacity: 0.8; }
@@ -26,7 +26,7 @@
         .form-card { background: #fff; padding: 20px; border-radius: 15px; border: 1px solid #eee; }
         .input-group { margin-bottom: 20px; }
         .input-group label { display: block; font-size: 13px; color: #666; margin-bottom: 8px; font-weight: bold; }
-        .input-wrapper { display: flex; align-items: center; border-bottom: 2px solid #E91E63; padding: 5px 0; } /* Modifié en Rose */
+        .input-wrapper { display: flex; align-items: center; border-bottom: 2px solid #E91E63; padding: 5px 0; }
         .input-wrapper span { font-size: 18px; font-weight: bold; margin-right: 10px; }
         .input-wrapper input { border: none; outline: none; width: 100%; font-size: 20px; font-weight: bold; background: transparent; }
 
@@ -34,13 +34,13 @@
         .info-calcul div { display: flex; justify-content: space-between; margin-bottom: 5px; }
 
         .btn-withdraw {
-            background: #E91E63; /* Modifié en Rose */ color: #fff; width: 100%; padding: 16px; border-radius: 30px;
+            background: #E91E63; color: #fff; width: 100%; padding: 16px; border-radius: 30px;
             border: none; font-size: 16px; font-weight: bold; margin-top: 25px; cursor: pointer;
         }
         .btn-withdraw:disabled { background: #880e4f; cursor: not-allowed; }
 
         /* Règles de retrait */
-        .rules-box { margin-top: 30px; padding: 15px; border-left: 3px solid #E91E63; background: #fff; } /* Modifié en Rose */
+        .rules-box { margin-top: 30px; padding: 15px; border-left: 3px solid #E91E63; background: #fff; }
         .rules-box h3 { margin: 0 0 10px; font-size: 14px; text-transform: uppercase; color: #E91E63; }
         .rules-box ul { margin: 0; padding-left: 20px; font-size: 12px; color: #444; line-height: 1.8; }
         
@@ -66,7 +66,7 @@
                 <label>Montant à retirer</label>
                 <div class="input-wrapper">
                     <span>FC</span>
-                    <input type="number" id="withdrawAmount" placeholder="Min. 2500" oninput="calculateFees()">
+                    <input type="number" id="withdrawAmount" placeholder="Min. 5000" oninput="calculateFees()">
                 </div>
             </div>
 
@@ -79,7 +79,7 @@
             </div>
 
             <div class="info-calcul">
-                <div><span>Frais de retrait (20%) :</span> <span id="feeLabel">0 FC</span></div>
+                <div><span>Frais de retrait (15%) :</span> <span id="feeLabel">0 FC</span></div>
                 <div><strong style="color:#000;">Montant net à recevoir :</strong> <strong id="netLabel" style="color:#E91E63;">0 FC</strong></div>
             </div>
 
@@ -94,8 +94,8 @@
             <h3>Conditions de retrait</h3>
             <ul>
                 <li><strong>Obligation :</strong> Sécurité activée — Seuls les membres ayant un investissement (VIP) actif ont droit au retrait.</li>
-                <li>Montant minimum de retrait : <strong>2 500 FC</strong>.</li>
-                <li>Frais de service : <strong>20%</strong> (Inclus maintenance de la plateforme).</li>
+                <li>Montant minimum de retrait : <strong>5 000 FC</strong>.</li>
+                <li>Frais de service : <strong>15%</strong> (Inclus maintenance de la plateforme).</li>
                 <li><strong>Limite :</strong> Un seul retrait autorisé par 24 heures.</li>
                 <li>Traitement : 4h à 24h.</li>
             </ul>
@@ -127,7 +127,7 @@
 
         function calculateFees() {
             const amount = parseFloat(document.getElementById('withdrawAmount').value) || 0;
-            const fee = amount * 0.20; 
+            const fee = amount * 0.15; // Modifié à 15%
             const net = amount - fee;
             document.getElementById('feeLabel').innerText = Math.floor(fee).toLocaleString() + " FC";
             document.getElementById('netLabel').innerText = (net > 0 ? Math.floor(net) : 0).toLocaleString() + " FC";
@@ -152,7 +152,7 @@
                 return;
             }
 
-            if (isNaN(amount) || amount < 2500) { alert("Minimum de retrait : 2 500 FC"); return; }
+            if (isNaN(amount) || amount < 5000) { alert("Minimum de retrait : 5 000 FC"); return; } // Modifié à 5000
             if (amount > currentBalance) { alert("Solde insuffisant."); return; }
             if (receiver.length < 9) { alert("Numéro de réception invalide."); return; }
 
@@ -176,7 +176,7 @@
                 const request = {
                     userAccount: userPhone,
                     amount: amount,
-                    netAmount: Math.floor(amount * 0.80), 
+                    netAmount: Math.floor(amount * 0.85), // Modifié à 85% net restant
                     receiverPhone: receiver,
                     date: new Date().toLocaleString(),
                     status: "en_attente"
