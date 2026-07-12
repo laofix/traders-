@@ -10,7 +10,7 @@
         body { margin: 0; background-color: #f8f8f8; color: #000; padding-bottom: 80px; }
 
         .team-header {
-            background-color: #E91E63; /* Modifié en Rose */
+            background-color: #E91E63;
             color: #fff;
             padding: 40px 20px;
             text-align: center;
@@ -35,7 +35,7 @@
         }
         .lv-badge {
             display: inline-block;
-            border: 1px solid #E91E63; /* Modifié en Rose */
+            border: 1px solid #E91E63;
             color: #E91E63;
             padding: 2px 8px;
             border-radius: 5px;
@@ -43,7 +43,7 @@
             font-size: 12px;
             margin-bottom: 8px;
         }
-        .comm-rate { font-size: 11px; font-weight: bold; margin-bottom: 5px; color: #E91E63; } /* Modifié en Rose */
+        .comm-rate { font-size: 11px; font-weight: bold; margin-bottom: 5px; color: #E91E63; }
         .comm-stats { font-size: 10px; color: #666; line-height: 1.4; }
 
         .nav-buttons {
@@ -53,7 +53,7 @@
             padding: 0 20px 20px;
         }
         .btn-outline {
-            border: 1px solid #E91E63; /* Modifié en Rose */
+            border: 1px solid #E91E63;
             padding: 8px 15px;
             border-radius: 20px;
             font-size: 12px;
@@ -82,7 +82,7 @@
         }
         .copy-text { flex: 1; font-size: 13px; color: #333; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
         .btn-copy {
-            background: #E91E63; /* Modifié en Rose */
+            background: #E91E63;
             color: #fff;
             border: none;
             padding: 6px 15px;
@@ -92,7 +92,7 @@
         }
 
         .progression-banner {
-            background: #E91E63; /* Modifié en Rose */
+            background: #E91E63;
             color: #fff;
             margin: 20px;
             padding: 20px;
@@ -115,7 +115,7 @@
             border-top: 1px solid #ddd;
         }
         .nav-item { text-decoration: none; color: #888; text-align: center; font-size: 11px; }
-        .nav-item.active { color: #E91E63; font-weight: bold; } /* Modifié en Rose */
+        .nav-item.active { color: #E91E63; font-weight: bold; }
         .nav-icon { font-size: 22px; display: block; margin-bottom: 4px; }
     </style>
 </head>
@@ -152,11 +152,11 @@
     <div class="invite-section">
         <div class="invite-title">Commencez à inviter</div>
         <div class="copy-box">
-            <div class="copy-text" id="inviteCode">Chargement...</div>
+            <div class="copy-text" id="inviteCode">Génération...</div>
             <button class="btn-copy" onclick="copyText('inviteCode')">Copier</button>
         </div>
         <div class="copy-box">
-            <div class="copy-text" id="inviteLink">Chargement...</div>
+            <div class="copy-text" id="inviteLink">Génération...</div>
             <button class="btn-copy" onclick="copyText('inviteLink')">Copier</button>
         </div>
     </div>
@@ -176,15 +176,20 @@
     <script>
         const dbUrl = "https://canal-e4274-default-rtdb.firebaseio.com/users";
         const userPhone = localStorage.getItem('userPhone');
-        // URL de base mise à jour avec Quartz Location
-        const baseUrl = "https://traders-first.github.io/Quartz-Location/";
+        // URL exacte mise à jour vers ta plateforme
+        const baseUrl = "https://taylic.github.io/traders-/";
 
         if (!userPhone) { window.location.href = 'index.html'; }
 
-        // Identifiant d'invitation unique (6 derniers chiffres du numéro)
-        const myInviteCode = userPhone.slice(-6);
-        document.getElementById('inviteCode').innerText = myInviteCode;
-        document.getElementById('inviteLink').innerText = `${baseUrl}register.html?ref=${myInviteCode}`;
+        // Fonction pour générer un code composé uniquement de lettres majuscules
+        function generateLetterCode() {
+            const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            let result = "";
+            for (let i = 0; i < 6; i++) {
+                result += letters.charAt(Math.floor(Math.random() * letters.length));
+            }
+            return result;
+        }
 
         function copyText(id) {
             const text = document.getElementById(id).innerText;
@@ -200,6 +205,7 @@
                 const response = await fetch(`${dbUrl}.json`);
                 const users = await response.json();
                 
+                let myInviteCode = "";
                 let lv1Count = 0, lv2Count = 0, lv3Count = 0;
                 let lv1Gains = 0, lv2Gains = 0, lv3Gains = 0;
 
@@ -207,22 +213,37 @@
                 let lv2Codes = [];
 
                 if (users) {
-                    // 1. Récupérer les gains cumulés réels de l'utilisateur connecté
                     const currentUserData = users[userPhone];
+                    
                     if (currentUserData) {
+                        // Récupérer le code en lettres existant ou en créer un nouveau
+                        if (currentUserData.inviteCode && /^[A-Z]{6}$/.test(currentUserData.inviteCode)) {
+                            myInviteCode = currentUserData.inviteCode;
+                        } else {
+                            myInviteCode = generateLetterCode();
+                            // Sauvegarder le nouveau code généré dans la DB
+                            await fetch(`${dbUrl}/${userPhone}.json`, {
+                                method: 'PATCH',
+                                body: JSON.stringify({ inviteCode: myInviteCode })
+                            });
+                        }
+
                         lv1Gains = currentUserData.totalGainsLV1 || 0;
                         lv2Gains = currentUserData.totalGainsLV2 || 0;
                         lv3Gains = currentUserData.totalGainsLV3 || 0;
                     }
 
-                    // 2. Établir l'arbre généalogique de l'équipe pour compter les membres par niveau
+                    // Affichage immédiat du code et du lien
+                    document.getElementById('inviteCode').innerText = myInviteCode;
+                    document.getElementById('inviteLink').innerText = `${baseUrl}register.html?ref=${myInviteCode}`;
+
+                    // Cartographier les structures d'invitations basées sur les codes de lettres
                     for (let id in users) {
                         const u = users[id];
                         if (u.phone && u.referredBy === myInviteCode) {
                             lv1Count++;
-                            const currentCode = u.phone.slice(-6);
-                            if (!lv1Codes.includes(currentCode)) {
-                                lv1Codes.push(currentCode);
+                            if (u.inviteCode && !lv1Codes.includes(u.inviteCode)) {
+                                lv1Codes.push(u.inviteCode);
                             }
                         }
                     }
@@ -230,11 +251,10 @@
                     for (let id in users) {
                         const u = users[id];
                         if (u.phone && u.referredBy && lv1Codes.includes(u.referredBy)) {
-                            if (u.phone.slice(-6) !== myInviteCode) {
+                            if (u.inviteCode !== myInviteCode) {
                                 lv2Count++;
-                                const currentCode = u.phone.slice(-6);
-                                if (!lv2Codes.includes(currentCode)) {
-                                    lv2Codes.push(currentCode);
+                                if (u.inviteCode && !lv2Codes.includes(u.inviteCode)) {
+                                    lv2Codes.push(u.inviteCode);
                                 }
                             }
                         }
@@ -243,15 +263,14 @@
                     for (let id in users) {
                         const u = users[id];
                         if (u.referredBy && lv2Codes.includes(u.referredBy)) {
-                            const currentCode = u.phone ? u.phone.slice(-6) : "";
-                            if (currentCode !== myInviteCode && !lv1Codes.includes(currentCode)) {
+                            if (u.inviteCode !== myInviteCode && !lv1Codes.includes(u.inviteCode)) {
                                 lv3Count++;
                             }
                         }
                     }
                 }
 
-                // Affichage dynamique dans l'interface graphique
+                // Liaison des données avec l'interface graphique
                 document.getElementById('countLv1').innerText = lv1Count;
                 document.getElementById('rewardLv1').innerText = lv1Gains.toLocaleString() + " FC";
 
